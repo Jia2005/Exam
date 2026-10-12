@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You've Got This 💜 Exam Season Pep Talk</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --lavender: #f1e9ff;
+  --periwinkle: #e3dafc;
+  --peach: #ffe4dc;
+  --butter: #fff3c4;
+  --butter-dark: #f5d36a;
+  --purple: #8f79d6;
+  --purple-dark: #6f5bb5;
+  --text-main: #4b4263;
+  --text-soft: #8b82a3;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--lavender);
+  background-image: radial-gradient(var(--periwinkle) 2px, transparent 2px), radial-gradient(var(--peach) 2px, var(--lavender) 2px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.corner-decor { position: fixed; pointer-events: none; z-index: 10; font-size: 24px; opacity: .9; }
+.top-left { top: 15px; left: 15px; }
+.top-right { top: 15px; right: 15px; transform: scaleX(-1); }
+.bottom-left { bottom: 15px; left: 15px; transform: scaleY(-1); }
+.bottom-right { bottom: 15px; right: 15px; transform: scale(-1); }
+
+/* bubbles floating up */
+.bubbles { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.bubble {
+  position: absolute; bottom: -60px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.25));
+  border: 1px solid rgba(143,121,214,.25);
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  15% { opacity: .9; }
+  100% { transform: translateY(-115vh) translateX(40px); opacity: 0; }
+}
+
+.container {
+  width: 90%; max-width: 650px; min-height: 85vh;
+  background: rgba(255,255,255,.93);
+  border-radius: 30px;
+  border: 2px solid var(--periwinkle);
+  box-shadow: 0 10px 30px rgba(143,121,214,.18);
+  padding: 40px 30px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; z-index: 5; margin: 40px 0;
+}
+.page { display: none; flex-direction: column; align-items: center; text-align: center; flex-grow: 1; justify-content: center; animation: fadeIn .6s ease forwards; }
+.page.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+h1 { font-family: 'Caveat', cursive; font-size: 2.8rem; color: var(--purple); margin-bottom: 20px; line-height: 1.2; }
+p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; }
+.hand { font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--purple); }
+.small { font-size: .95rem; }
+.big { font-size: 1.6rem; font-weight: 700; color: var(--purple); margin: 10px 0; }
+.emoji-row { font-size: 2.2rem; margin: 10px 0; }
+
+.cute-btn {
+  background: var(--periwinkle); color: var(--text-main); border: none;
+  padding: 12px 25px; border-radius: 50px; font: 600 1rem 'Quicksand', sans-serif;
+  cursor: pointer; margin-top: 20px; box-shadow: 0 4px 10px rgba(111,91,181,.12);
+  transition: all .3s ease;
+}
+.cute-btn:hover { transform: translateY(-3px) scale(1.04); background: var(--butter-dark); }
+.cute-btn.alt { background: var(--butter); }
+
+/* envelope */
+.envelope { cursor: pointer; position: relative; width: 180px; height: 120px; background: var(--peach); border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,.08); display: flex; justify-content: center; align-items: center; margin: 30px auto; transition: transform .3s; animation: wiggle 2.5s ease-in-out infinite; }
+.envelope:hover { transform: scale(1.07); }
+.flap { position: absolute; top: 0; left: 0; border-left: 90px solid transparent; border-right: 90px solid transparent; border-top: 65px solid #ffcfc2; transform-origin: top; transition: transform .4s; }
+.envelope.open .flap { transform: rotateX(180deg); }
+@keyframes wiggle { 0%,100% { rotate: -2deg; } 50% { rotate: 2deg; } }
+
+/* countdown */
+.timer { font-size: 3rem; font-weight: 700; color: var(--purple); background: var(--peach); padding: 10px 28px; border-radius: 20px; margin: 15px 0; border: 2px dashed var(--butter-dark); }
+.date-input { font: 600 1rem 'Quicksand', sans-serif; color: var(--text-main); background: var(--butter); border: 2px solid var(--butter-dark); border-radius: 50px; padding: 8px 16px; }
+
+/* dashboard */
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin: 15px 0; }
+.card { background: var(--peach); padding: 12px; border-radius: 16px; border: 1px solid rgba(245,211,106,.5); }
+.card span { display: block; font-size: .9rem; color: var(--text-soft); }
+.card strong { font-size: 1.2rem; color: var(--purple); }
+.badge { background: var(--butter); border: 3px double var(--butter-dark); padding: 20px; border-radius: 24px; margin: 15px 0; width: 100%; }
+
+/* certificate */
+.cert { border: 4px double var(--purple); background: var(--butter); padding: 25px; border-radius: 20px; width: 100%; margin: 10px 0; }
+.seal { background: var(--purple); color: #fff; font-size: .8rem; font-weight: 700; padding: 6px 14px; border-radius: 50px; display: inline-block; margin-top: 10px; letter-spacing: 1px; }
+
+/* checklist */
+.checklist { display: flex; flex-direction: column; gap: 10px; width: 100%; text-align: left; margin: 15px 0; }
+.check { background: var(--peach); padding: 12px 16px; border-radius: 14px; border-left: 5px solid var(--purple); cursor: pointer; transition: all .3s; opacity: .75; user-select: none; }
+.check:hover { opacity: 1; transform: translateX(4px); }
+.check.done { background: var(--periwinkle); opacity: 1; text-decoration: line-through; text-decoration-color: var(--purple); }
+.bar { width: 100%; height: 14px; background: var(--periwinkle); border-radius: 50px; overflow: hidden; }
+.bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--purple), var(--butter-dark)); border-radius: 50px; transition: width .5s; }
+
+/* polaroids */
+.polaroids { display: flex; justify-content: center; gap: 20px; margin: 20px 0; }
+.polaroid { background: #fff; padding: 10px 10px 18px; box-shadow: 0 4px 12px rgba(0,0,0,.1); border-radius: 6px; width: 135px; transform: rotate(-3deg); }
+.polaroid:nth-child(2) { transform: rotate(4deg); }
+.polaroid .pic { height: 100px; border-radius: 4px; background: var(--peach); display: flex; align-items: center; justify-content: center; font-size: 2.6rem; position: relative; overflow: hidden; }
+.polaroid .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.polaroid:nth-child(2) .pic { background: var(--periwinkle); }
+
+/* jar */
+.jar-wrap { cursor: pointer; margin: 20px auto; transition: transform .3s; }
+.jar-wrap:hover { transform: scale(1.08) rotate(-2deg); }
+.lid { width: 70px; height: 15px; background: var(--butter-dark); border-radius: 6px; margin: 0 auto 5px; }
+.jar { width: 110px; height: 140px; border: 4px solid var(--purple); border-radius: 22px 22px 32px 32px; background: rgba(255,255,255,.7); display: flex; justify-content: center; align-items: center; box-shadow: inset 0 0 15px rgba(143,121,214,.2); font-size: 2.2rem; }
+.note { background: var(--peach); padding: 15px; border-radius: 16px; border: 1px dashed var(--purple); min-height: 70px; display: flex; align-items: center; justify-content: center; margin-top: 15px; font-style: italic; transition: opacity .2s; width: 100%; }
+
+/* chat + breathing */
+.chat { background: #fff; border: 2px solid var(--peach); border-radius: 18px; padding: 20px; margin: 15px 0; min-height: 100px; display: none; flex-direction: column; justify-content: center; align-items: center; width: 100%; }
+.breath { width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, var(--periwinkle)); border: 2px solid var(--purple); display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 600; margin: 10px auto; animation: breathe 8s ease-in-out infinite; }
+@keyframes breathe { 0%,100% { transform: scale(.8); } 50% { transform: scale(1.25); } }
+
+.music-toggle { position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%; background: #fff; border: 2px solid var(--periwinkle); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; z-index: 100; box-shadow: 0 4px 12px rgba(111,91,181,.2); transition: transform .2s; }
+.music-toggle:hover { transform: scale(1.1); }
+.music-toggle.playing { animation: pulse 2s ease-in-out infinite; border-color: var(--purple); }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(143,121,214,.45); } 50% { box-shadow: 0 0 0 10px rgba(143,121,214,0); } }
+
+.footer { display: flex; justify-content: space-between; width: 100%; margin-top: 20px; font-size: .85rem; color: var(--text-soft); border-top: 1px solid rgba(143,121,214,.2); padding-top: 12px; }
+
+.confetti { position: fixed; width: 9px; height: 9px; border-radius: 50%; animation: fall 3s linear forwards; z-index: 99; }
+@keyframes fall { from { transform: translateY(0) rotate(0); opacity: 1; } to { transform: translateY(80vh) rotate(720deg); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+@media (max-width: 480px) { h1 { font-size: 2.3rem; } .container { padding: 30px 20px; } }
+</style>
+</head>
+<body>
+
+<div class="corner-decor top-left">💜✨</div>
+<div class="corner-decor top-right">💜✨</div>
+<div class="corner-decor bottom-left">✨💜</div>
+<!-- MUSIC: put your song in the same folder and name it audio.mp3 -->
+<audio id="bgMusic" loop preload="auto"><source src="audio.mp3" type="audio/mpeg"></audio>
+<div class="music-toggle" id="musicBtn" onclick="toggleMusic()" title="Play or pause music" role="button" aria-label="Play or pause music">🎵</div>
+<div class="bubbles" id="bubbles"></div>
+
+<div class="container">
+
+  <!-- PAGE 1 -->
+  <div class="page active" id="page-1">
+    <h1 style="margin-bottom:5px">Hey <span class="nm"></span> 💜</h1>
+    <p class="hand" style="margin-bottom:25px">A very important message has arrived.</p>
+    <div class="envelope" id="envelope" onclick="openEnvelope()"><div class="flap"></div><span style="font-size:2rem">💌</span></div>
+    <p class="small">(tap the envelope!)</p>
+    <div id="envelopeContent" style="display:none;margin-top:15px">
+      <p class="hand" style="font-size:2.2rem"><span class="nm"></span>...</p>
+      <p>okay, sit down for a sec.</p>
+      <p>Exams start on the 15th, and I know your brain is probably doing that thing where it screams a little.</p>
+      <p>So I made you a tiny website, because your person needs to say something important.</p>
+      <p>You are so much more ready than you think.</p>
+      <p class="big">YOU'VE GOT THIS. 🌷</p>
+      <button class="cute-btn" onclick="nextPage(2); confetti();">okay I'm listening →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page" id="page-2">
+    <h1>THE BIG COUNTDOWN</h1>
+    <p>Your exams start on the 15th, so here's the countdown. You can change the date if you like.</p>
+    <input type="date" class="date-input" id="examDate" onchange="updateCountdown()">
+    <div class="timer" id="countdown">?? days</div>
+    <p id="countMsg">Choose a date above and I'll tell you how to feel about it. 🫧</p>
+    <p class="hand" style="font-size:1.5rem">You've already done the hard part, <span class="nm"></span>. Now we just stay calm and confident. 🌷</p>
+    <button class="cute-btn" onclick="nextPage(3)">show me the report →</button>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page" id="page-3">
+    <h1>OFFICIAL <span class="nm"></span> READINESS REPORT</h1>
+    <div class="grid">
+      <div class="card"><span>Brain cells</span><strong>Fully charged</strong></div>
+      <div class="card"><span>Snack supply</span><strong>Stocked</strong></div>
+      <div class="card"><span>Panic needed</span><strong>0%</strong></div>
+      <div class="card"><span>Things you've already learned</span><strong>SO MANY</strong></div>
+    </div>
+    <div class="card" style="width:100%"><span>Bestie belief in you</span><strong>1000000%</strong></div>
+    <div class="badge">
+      <p class="hand" style="font-size:2.2rem;margin-bottom:0">EXAM SEASON WARRIOR</p>
+      <p class="small" style="margin:5px 0 0">Achievement unlocked.</p>
+    </div>
+    <p class="small">This is now officially part of your legend. ✨</p>
+    <button class="cute-btn" onclick="nextPage(4)">view official records →</button>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page" id="page-4">
+    <div class="cert">
+      <p class="small" style="letter-spacing:2px;color:var(--text-soft)">CERTIFICATE OF EXTREME CALM AND BRILLIANCE</p>
+      <p class="small" style="margin:10px 0">This is proudly presented to</p>
+      <p class="hand" style="font-size:2.3rem;margin:5px 0"><span class="nm"></span></p>
+      <p class="small" style="margin:10px 0">for being fully prepared to walk into those exams and shine</p>
+      <p style="font-weight:700">WITH SNACKS, SMARTS AND SPARKLE</p>
+      <p class="small" style="margin-top:8px">You've shown up, you've tried, and you kept going on the tired days. That counts for so much.</p>
+      <div class="small" style="margin-top:15px">Signed,<br><span class="hand" style="font-size:1.4rem">Your biggest fan and forever partner 💜</span></div>
+      <span class="seal">Certified Genius in Progress</span>
+    </div>
+    <button class="cute-btn" onclick="nextPage(5)">next page →</button>
+  </div>
+
+  <!-- PAGE 5 -->
+  <div class="page" id="page-5">
+    <h1>BUT LISTEN...</h1>
+    <p>I know exams feel huge right now.</p>
+    <p>But a mark is not who you are.</p>
+    <p>It's not a ruling on how smart, kind or capable you are.</p>
+    <p>It's just a few papers, and you're someone who already did the hard part by showing up all semester.</p>
+    <p>So instead of thinking <br><i>"What if I mess up?"</i></p>
+    <p>Try thinking <br><b style="color:var(--purple)">"I've done my best and I'm ready to show it."</b></p>
+    <p>Because you are. 🌷</p>
+    <div class="emoji-row">📚 ✏️ 🧃 💜</div>
+    <button class="cute-btn" onclick="nextPage(6)">see the game plan →</button>
+  </div>
+
+  <!-- PAGE 6 -->
+  <div class="page" id="page-6">
+    <h1>THE TINY PREP CHECKLIST</h1>
+    <p class="small">Tap each one as you do it. Tiny wins count!</p>
+    <div class="checklist" id="checklist">
+      <div class="check" onclick="toggleCheck(this)">🗓️ Make a tiny, realistic plan</div>
+      <div class="check" onclick="toggleCheck(this)">📖 Study one topic at a time</div>
+      <div class="check" onclick="toggleCheck(this)">🍪 Snack and water break (very important)</div>
+      <div class="check" onclick="toggleCheck(this)">✍️ Revise the tricky bits</div>
+      <div class="check" onclick="toggleCheck(this)">😴 Sleep like the champion you are</div>
+      <div class="check" onclick="toggleCheck(this)">🌟 Walk into the exam feeling brave</div>
+    </div>
+    <div class="bar"><div id="barFill"></div></div>
+    <p class="small" id="barMsg" style="margin-top:10px">0 of 6 done. Every tick is a win. 🫧</p>
+    <button class="cute-btn" onclick="nextPage(7)">continue →</button>
+  </div>
+
+  <!-- PAGE 7 -->
+  <div class="page" id="page-7">
+    <h1>A LITTLE REMINDER FROM ME</h1>
+    <p>You don't have to study all day.</p>
+    <p>You don't have to know everything.</p>
+    <p>You don't have to be perfect.</p>
+    <p>You just have to keep going, one page at a time.</p>
+    <p>Some days will feel amazing. Some days your notes will look like a foreign language. Both are normal.</p>
+    <p>And if you blank on a question, take a breath. It usually comes back.</p>
+    <p class="hand" style="font-size:1.5rem">And if you ever forget all this, I'll remind you. 💜</p>
+    <button class="cute-btn" onclick="nextPage(8)">our little story →</button>
+  </div>
+
+  <!-- PAGE 8 -->
+  <div class="page" id="page-8">
+    <h1>JUST SO YOU KNOW 🤍</h1>
+    <p>I might not be sitting next to you with a highlighter, but I'm with you in every single study hour.</p>
+    <p>Every time you open a book, I'm cheering for you from my corner.</p>
+    <p>When you're stressed, tell me. When you're proud, tell me. When you want to scream into a pillow, also tell me.</p>
+    <p>I'm not going anywhere, and I'm so proud to be your person.</p>
+    <!-- PHOTOS: put image1.jpg and image2.jpg in the same folder as this file. Until then the emoji placeholders show. -->
+    <div class="polaroids">
+      <div class="polaroid"><div class="pic"><img src="image1.jpg" alt="My favourite person" onerror="this.remove()">🌸</div><p class="hand" style="font-size:1rem;margin:6px 0 0">my favourite person</p></div>
+      <div class="polaroid"><div class="pic"><img src="image2.jpg" alt="Us together" onerror="this.remove()">🫶</div><p class="hand" style="font-size:1rem;margin:6px 0 0">us, always 💜</p></div>
+    </div>
+    <p class="small">Nothing you do in these exams will change how much I adore you. 🌷</p>
+    <button class="cute-btn" onclick="nextPage(9)">open the hype jar →</button>
+  </div>
+
+  <!-- PAGE 9 -->
+  <div class="page" id="page-9">
+    <h1>THE <span class="nm"></span> HYPE JAR</h1>
+    <p class="small">Tap the jar whenever you need a boost. Every note is just for you.</p>
+    <div class="jar-wrap" onclick="randomNote()"><div class="lid"></div><div class="jar">💜✨</div></div>
+    <div class="note" id="noteBox">Tap the jar to pull out your first note! 🫧</div>
+    <button class="cute-btn" onclick="nextPage(10)">take a break now →</button>
+  </div>
+
+  <!-- PAGE 10 -->
+  <div class="page" id="page-10">
+    <h1>OKAY NOW, BREAK TIME</h1>
+    <p>Close the books for a minute. Seriously.</p>
+    <p>Breathe in as the bubble grows, and out as it shrinks. Drink some water. Stretch your shoulders. You deserve it.</p>
+    <div class="breath">breathe</div>
+    <button class="cute-btn" id="breakBtn" onclick="startChat()">♡ Stay a little longer</button>
+    <div class="chat" id="chatArea">
+      <p id="chatQ" class="hand" style="font-size:1.5rem;margin-bottom:10px"></p>
+      <button class="cute-btn" style="margin-top:5px;padding:6px 15px;font-size:.9rem" onclick="nextQ()">next question 💭</button>
+    </div>
+    <button class="cute-btn alt" style="margin-top:15px" onclick="nextPage(11)">final message →</button>
+  </div>
+
+  <!-- PAGE 11 -->
+  <div class="page" id="page-11">
+    <h1>I believe in you, <span class="nm"></span>. 💜</h1>
+    <p>Not because of a mark or a grade.</p>
+    <p>But because of how hard you've tried, even when you were tired.</p>
+    <p>Go at your own pace. Take your breaks. Be kind to yourself.</p>
+    <p>When the 15th comes, remember that I'm cheering for you the loudest.</p>
+    <p class="big">BEST OF LUCK, MY LOVE. 🍀</p>
+    <p class="hand" style="font-size:1.8rem;margin:15px 0">Go and show them what you've got! ✨</p>
+    <button class="cute-btn" onclick="finalReveal()">I'm ready ♡</button>
+    <p id="finalMsg" class="hand" style="font-size:1.6rem;margin-top:10px;display:none">Good luck, superstar! Text me the second you're done. 💜</p>
+  </div>
+
+  <div class="footer">
+    <span id="pageIndicator">01 / 11</span>
+    <span><span class="nm"></span>'s Exam Pep Talk 🌷</span>
+  </div>
+</div>
+
+<script>
+/* Change this to your friend's name! */
+const NAME = "Bestie";
+document.querySelectorAll('.nm').forEach(el => el.textContent = NAME);
+
+let currentPage = 1;
+const totalPages = 11;
+
+/* floating bubbles */
+const bubbleBox = document.getElementById('bubbles');
+for (let i = 0; i < 18; i++) {
+  const b = document.createElement('div');
+  const s = Math.random() * 22 + 10;
+  b.className = 'bubble';
+  b.style.cssText = `left:${Math.random() * 100}vw;width:${s}px;height:${s}px;animation-duration:${Math.random() * 8 + 8}s;animation-delay:${Math.random() * 8}s`;
+  bubbleBox.appendChild(b);
+}
+
+function nextPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + n).classList.add('active');
+  currentPage = n;
+  document.getElementById('pageIndicator').innerText = `${String(n).padStart(2, '0')} / ${totalPages}`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openEnvelope() {
+  playMusic();
+  document.getElementById('envelope').classList.add('open');
+  setTimeout(() => {
+    document.getElementById('envelope').style.display = 'none';
+    document.getElementById('envelopeContent').style.display = 'block';
+    confetti();
+  }, 400);
+}
+
+function confetti() {
+  const colors = ['#e3dafc', '#ffe4dc', '#f5d36a', '#8f79d6', '#fff'];
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.top = '20vh';
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.animationDuration = Math.random() * 2 + 1 + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3000);
+  }
+}
+
+/* countdown */
+const dateEl = document.getElementById('examDate');
+dateEl.value = '2026-10-15'; // exams start on the 15th, change if needed
+function updateCountdown() {
+  const diff = Math.ceil((new Date(dateEl.value) - new Date().setHours(0,0,0,0)) / 86400000);
+  const t = document.getElementById('countdown'), m = document.getElementById('countMsg');
+  if (isNaN(diff)) { t.textContent = '?? days'; return; }
+  if (diff > 1) { t.textContent = diff + ' days'; m.textContent = diff > 7 ? 'Plenty of time for little steps. No rushing needed. 🫧' : 'Just a few more days. Small steps, good sleep, and me cheering the whole way. 🫧'; }
+  else if (diff === 1) { t.textContent = '1 day'; m.textContent = 'Tomorrow! Light revision, a good meal and an early night. Best of luck, my love. 🌙'; }
+  else if (diff === 0) { t.textContent = 'TODAY'; m.textContent = 'It is today! Deep breath. You are ready for this and I believe in you. ✨'; }
+  else { t.textContent = 'Done!'; m.textContent = 'That date has passed. You did it, superstar! 🎉'; }
+}
+updateCountdown();
+
+/* checklist */
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  const total = document.querySelectorAll('.check').length;
+  const done = document.querySelectorAll('.check.done').length;
+  document.getElementById('barFill').style.width = (done / total * 100) + '%';
+  document.getElementById('barMsg').textContent = done === total
+    ? 'All done! You are a total star. 🎉' : `${done} of ${total} done. Every tick is a win. 🫧`;
+  if (done === total) confetti();
+}
+
+/* hype jar */
+const notes = [
+  "You know more than you think you do.",
+  "One page today is one page closer.",
+  "I'm so proud of you already.",
+  "Your future self is going to say thank you.",
+  "Tired brain? Water, snack, stretch. Then try again.",
+  "Academic weapon loading... 💜",
+  "Look at you being all dedicated. I'm emotional.",
+  "Take a breath. You've got this.",
+  "I'm cheering for you, every single day.",
+  "A bad study day doesn't cancel all the good ones.",
+  "Go easy on yourself today. You're doing great. 🌷",
+  "Best of luck on the 15th. I'll be thinking of you the whole time. 🍀",
+  "Text me when you're done. I want to hear everything."
+];
+function randomNote() {
+  const box = document.getElementById('noteBox');
+  box.style.opacity = 0;
+  setTimeout(() => {
+    box.innerText = `"${notes[Math.floor(Math.random() * notes.length)]}"`;
+    box.style.opacity = 1;
+  }, 200);
+}
+
+/* chat */
+const questions = [
+  "What's the most random thing you thought about today?",
+  "What should we eat to celebrate after your last exam?",
+  "Tell me one thing that's stressing you out. I'm listening.",
+  "Tell me something good that happened today.",
+  "If you could do anything for one hour right now, what would it be?",
+  "Okay important question: what are we celebrating with after exams? 🧁"
+];
+let qi = 0;
+function startChat() {
+  document.getElementById('breakBtn').style.display = 'none';
+  document.getElementById('chatArea').style.display = 'flex';
+  document.getElementById('chatQ').innerText = questions[qi];
+}
+function nextQ() {
+  qi = (qi + 1) % questions.length;
+  const q = document.getElementById('chatQ');
+  q.style.opacity = 0;
+  setTimeout(() => { q.innerText = questions[qi]; q.style.opacity = 1; }, 200);
+}
+
+/* music: starts when the envelope is tapped */
+const audio = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+audio.volume = 0.5;
+function setMusicUI(on) {
+  musicBtn.textContent = on ? '🎶' : '🔇';
+  musicBtn.classList.toggle('playing', on);
+}
+function playMusic() {
+  audio.play().then(() => setMusicUI(true)).catch(() => setMusicUI(false));
+}
+function toggleMusic() {
+  if (audio.paused) playMusic();
+  else { audio.pause(); setMusicUI(false); }
+}
+
+function finalReveal() {
+  document.getElementById('finalMsg').style.display = 'block';
+  confetti();
+}
+</script>
+</body>
+</html>
